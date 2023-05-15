@@ -26,7 +26,8 @@ const HeaderWrapper = styled.div`
 const HeaderContainer = styled.div`
 	width: 100%;
 	max-width: 1024px;
-	margin: 20px 0 100px 0;
+	margin: ${(props) =>
+		props.type === 'search-results' ? '20px 0' : '20px 0 100px 0'};
 `;
 
 const HeaderList = styled.div`
@@ -58,7 +59,7 @@ const HeaderTitle = styled.h2`
 	color: white;
 `;
 
-const SubTitle = styled.p`
+const SubTitle = styled.h3`
 	color: white;
 	font-size: 1.5em;
 	margin: 2em 0;
@@ -108,16 +109,12 @@ const SearchIcon = styled.div`
 	color: #6b6b6b;
 `;
 
-/* const HeaderSearchBtn = styled.button`
-    
-` */
-
 const HeaderSearchSpan = styled.span`
 	color: #6b6b6b;
 	cursor: pointer;
 `;
 
-const Header = () => {
+const Header = ({ type }) => {
 	const [date, setDate] = useState([
 		{
 			startDate: new Date(),
@@ -153,7 +150,7 @@ options[name]: it will find the value from the object, in this case it's 1, 0, 1
 
 	return (
 		<HeaderWrapper>
-			<HeaderContainer>
+			<HeaderContainer type={type}>
 				<HeaderList>
 					<HeaderItems>
 						<RiHotelBedFill />
@@ -176,138 +173,141 @@ options[name]: it will find the value from the object, in this case it's 1, 0, 1
 						<span>Airport Taxi</span>
 					</HeaderItems>
 				</HeaderList>
-				<HeaderTitle>Sign in, save money</HeaderTitle>
-				<SubTitle>
-					Save 10% or more at participating properties. Just look for the blue
-					Genius label
-				</SubTitle>
-				<HeaderBtn>Sign in or register</HeaderBtn>
 
-				<HeaderSearchContainer>
-					<HeaderSearchItems>
-						<SearchIcon>
-							<RiHotelBedFill />
-						</SearchIcon>
-						<SearchInput
-							type="text"
-							placeholder="Where are you going?"
-						></SearchInput>
-					</HeaderSearchItems>
+				{type !== 'search-results' && (
+					<>
+						<HeaderTitle>Sign in, save money</HeaderTitle>
+						<SubTitle>
+							Save 10% or more at participating properties. Just look for the
+							blue Genius label
+						</SubTitle>
+						<HeaderBtn>Sign in or register</HeaderBtn>
 
-					<HeaderSearchItems>
-						<SearchIcon>
-							<BiCalendar />
-						</SearchIcon>
-						{/* <SearchInput
-								type="date"
-								placeholder="Check-in date -- Check-out date"
-							></SearchInput> */}
-						<HeaderSearchSpan
-							onClick={() => setOpenDatePicker(!openDatePicker)}
-						>{`${format(date[0].startDate, 'MM/dd/yyyy')} to ${format(
-							date[0].endDate,
-							'MM/dd/yyyy'
-						)}`}</HeaderSearchSpan>
-						{openDatePicker && (
-							<DateRange
-								editableDateInputs={true}
-								onChange={(item) => setDate([item.selection])}
-								moveRangeOnFirstSelection={false}
-								ranges={date}
-								className="date-range"
-							/>
-						)}
-					</HeaderSearchItems>
+						<HeaderSearchContainer>
+							<HeaderSearchItems>
+								<SearchIcon>
+									<RiHotelBedFill />
+								</SearchIcon>
+								<SearchInput
+									type="text"
+									placeholder="Where are you going?"
+								></SearchInput>
+							</HeaderSearchItems>
 
-					<HeaderSearchItems>
-						<SearchIcon>
-							<BsFillPersonFill />
-						</SearchIcon>
-						{/* <SearchInput
-								type="text"
-								placeholder="Where are you going?"
-							></SearchInput> */}
-						<HeaderSearchSpan
-							onClick={() => setOpenOptions(!openOptions)}
-						>{`${options.adult} adults · ${options.child} children · ${options.room} room`}</HeaderSearchSpan>
+							<HeaderSearchItems>
+								<SearchIcon>
+									<BiCalendar />
+								</SearchIcon>
 
-						{openOptions && (
-							<div className="optionWrapper">
-								<div className="optionItems">
-									<span className="optionText">Adults</span>
-									<div className="optionCounter">
-										<button
-											disabled={options.adult <= 1}
-											className="optionCounterBtn"
-											onClick={(event) =>
-												handleOption(event, 'adult', 'decrease')
-											}
-										>
-											-
-										</button>
-										<span className="optionCounterNum">{options.adult}</span>
-										<button
-											className="optionCounterBtn"
-											onClick={(event) =>
-												handleOption(event, 'adult', 'increase')
-											}
-										>
-											+
-										</button>
+								<HeaderSearchSpan
+									onClick={() => setOpenDatePicker(!openDatePicker)}
+								>{`${format(date[0].startDate, 'MM/dd/yyyy')} to ${format(
+									date[0].endDate,
+									'MM/dd/yyyy'
+								)}`}</HeaderSearchSpan>
+								{openDatePicker && (
+									<DateRange
+										editableDateInputs={true}
+										onChange={(item) => setDate([item.selection])}
+										moveRangeOnFirstSelection={false}
+										ranges={date}
+										className="date-range"
+									/>
+								)}
+							</HeaderSearchItems>
+
+							<HeaderSearchItems>
+								<SearchIcon>
+									<BsFillPersonFill />
+								</SearchIcon>
+
+								<HeaderSearchSpan
+									onClick={() => setOpenOptions(!openOptions)}
+								>{`${options.adult} adults · ${options.child} children · ${options.room} room`}</HeaderSearchSpan>
+
+								{openOptions && (
+									<div className="optionWrapper">
+										<div className="optionItems">
+											<span className="optionText">Adults</span>
+											<div className="optionCounter">
+												<button
+													disabled={options.adult <= 1}
+													className="optionCounterBtn"
+													onClick={(event) =>
+														handleOption(event, 'adult', 'decrease')
+													}
+												>
+													-
+												</button>
+												<span className="optionCounterNum">
+													{options.adult}
+												</span>
+												<button
+													className="optionCounterBtn"
+													onClick={(event) =>
+														handleOption(event, 'adult', 'increase')
+													}
+												>
+													+
+												</button>
+											</div>
+										</div>
+										<div className="optionItems">
+											<span className="optionText">Children</span>
+											<div className="optionCounter">
+												<button
+													disabled={options.child <= 0}
+													className="optionCounterBtn"
+													onClick={(event) =>
+														handleOption(event, 'child', 'decrease')
+													}
+												>
+													-
+												</button>
+												<span className="optionCounterNum">
+													{options.child}
+												</span>
+												<button
+													className="optionCounterBtn"
+													onClick={(event) =>
+														handleOption(event, 'child', 'increase')
+													}
+												>
+													+
+												</button>
+											</div>
+										</div>
+										<div className="optionItems">
+											<span className="optionText">Rooms</span>
+											<div className="optionCounter">
+												{/* we're passing here on the btn a function when you click it increase or decrease, depending on the variable we passed in (name, and the operation mode->increase or decrease) */}
+												<button
+													disabled={options.room <= 1}
+													className="optionCounterBtn"
+													onClick={(event) =>
+														handleOption(event, 'room', 'decrease')
+													}
+												>
+													-
+												</button>
+												<span className="optionCounterNum">{options.room}</span>
+												<button
+													className="optionCounterBtn"
+													onClick={(event) =>
+														handleOption(event, 'room', 'increase')
+													}
+												>
+													+
+												</button>
+											</div>
+										</div>
 									</div>
-								</div>
-								<div className="optionItems">
-									<span className="optionText">Children</span>
-									<div className="optionCounter">
-										<button
-											disabled={options.child <= 0}
-											className="optionCounterBtn"
-											onClick={(event) =>
-												handleOption(event, 'child', 'decrease')
-											}
-										>
-											-
-										</button>
-										<span className="optionCounterNum">{options.child}</span>
-										<button
-											className="optionCounterBtn"
-											onClick={(event) =>
-												handleOption(event, 'child', 'increase')
-											}
-										>
-											+
-										</button>
-									</div>
-								</div>
-								<div className="optionItems">
-									<span className="optionText">Rooms</span>
-									<div className="optionCounter">
-										{/* we're passing here on the btn a function when you click it increase or decrease, depending on the variable we passed in (name, and the operation mode->increase or decrease) */}
-										<button
-											disabled={options.room <= 1}
-											className="optionCounterBtn"
-											onClick={(event) =>
-												handleOption(event, 'room', 'decrease')
-											}
-										>
-											-
-										</button>
-										<span className="optionCounterNum">{options.room}</span>
-										<button
-											className="optionCounterBtn"
-											onClick={(event) =>
-												handleOption(event, 'room', 'increase')
-											}
-										>
-											+
-										</button>
-									</div>
-								</div>
-							</div>
-						)}
-					</HeaderSearchItems>
-					<HeaderBtn>Search</HeaderBtn>
-				</HeaderSearchContainer>
+								)}
+							</HeaderSearchItems>
+							<HeaderBtn>Search</HeaderBtn>
+						</HeaderSearchContainer>
+					</>
+				)}
 			</HeaderContainer>
 		</HeaderWrapper>
 	);

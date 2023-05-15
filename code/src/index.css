@@ -56,6 +56,10 @@ code {
 	background-color: #f2f7fb;
 }
 
+.optionCounterBtn:disabled {
+	cursor: not-allowed;
+}
+
 .optionCounterNum {
 	padding-top: 10px;
 }
