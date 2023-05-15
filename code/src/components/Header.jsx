@@ -4,14 +4,18 @@ import {
 	BsCarFrontFill,
 	BsFillTaxiFrontFill,
 	BsAirplaneFill,
+	BsFillPersonFill,
 } from 'react-icons/bs';
 import { MdOutlineAttractions } from 'react-icons/md';
+import { BiCalendar } from 'react-icons/bi';
+import { DateRange } from 'react-date-range';
 
 const HeaderWrapper = styled.div`
 	background-color: #003580;
 	color: white;
 	display: flex;
 	justify-content: center;
+	position: relative;
 `;
 
 const HeaderContainer = styled.div`
@@ -68,6 +72,46 @@ const HeaderBtn = styled.button`
 	}
 `;
 
+const HeaderSearchContainer = styled.form`
+	height: 30px;
+	background-color: white;
+	border: 3px solid #febb00;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 10px 0;
+	padding-left: 10px;
+	position: absolute;
+	bottom: -25px;
+	width: 100%;
+	max-width: 1024px;
+`;
+
+const HeaderSearchItems = styled.div`
+	display: flex;
+	align-items: center;
+	gap: 5px;
+`;
+
+const SearchInput = styled.input`
+	border: none;
+	outline: none;
+	font-size: 1em;
+`;
+
+const SearchIcon = styled.div`
+	color: #6b6b6b;
+`;
+
+/* const HeaderSearchBtn = styled.button`
+    
+` */
+
+const HeaderSearchSpan = styled.span`
+	color: #6b6b6b;
+	cursor: pointer;
+`;
+
 const Header = () => {
 	return (
 		<HeaderWrapper>
@@ -100,6 +144,41 @@ const Header = () => {
 					Genius label
 				</SubTitle>
 				<HeaderBtn>Sign in or register</HeaderBtn>
+
+				<HeaderSearchContainer>
+					<HeaderSearchItems>
+						<SearchIcon>
+							<RiHotelBedFill />
+						</SearchIcon>
+						<SearchInput
+							type="text"
+							placeholder="Where are you going?"
+						></SearchInput>
+					</HeaderSearchItems>
+
+					<HeaderSearchItems>
+						<SearchIcon>
+							<BiCalendar />
+						</SearchIcon>
+						{/* <SearchInput
+								type="date"
+								placeholder="Check-in date -- Check-out date"
+							></SearchInput> */}
+						<HeaderSearchSpan>Check-in date -- Check-out date</HeaderSearchSpan>
+					</HeaderSearchItems>
+
+					<HeaderSearchItems>
+						<SearchIcon>
+							<BsFillPersonFill />
+						</SearchIcon>
+						{/* <SearchInput
+								type="text"
+								placeholder="Where are you going?"
+							></SearchInput> */}
+						<HeaderSearchSpan>2 adults; 0 children; 1 room</HeaderSearchSpan>
+					</HeaderSearchItems>
+					<HeaderBtn>Search</HeaderBtn>
+				</HeaderSearchContainer>
 			</HeaderContainer>
 		</HeaderWrapper>
 	);
