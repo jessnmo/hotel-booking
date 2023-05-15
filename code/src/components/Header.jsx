@@ -9,6 +9,11 @@ import {
 import { MdOutlineAttractions } from 'react-icons/md';
 import { BiCalendar } from 'react-icons/bi';
 import { DateRange } from 'react-date-range';
+import 'react-date-range/dist/styles.css'; // main css file
+import 'react-date-range/dist/theme/default.css'; // theme css file
+import { format } from 'date-fns';
+
+import { useState } from 'react';
 
 const HeaderWrapper = styled.div`
 	background-color: #003580;
@@ -113,6 +118,39 @@ const HeaderSearchSpan = styled.span`
 `;
 
 const Header = () => {
+	const [date, setDate] = useState([
+		{
+			startDate: new Date(),
+			endDate: new Date(),
+			key: 'selection',
+		},
+	]);
+
+	const [openDatePicker, setOpenDatePicker] = useState(false);
+	const [options, setOptions] = useState({
+		adult: 1,
+		child: 0,
+		room: 1,
+	});
+	const [openOptions, setOpenOptions] = useState(false);
+
+	const handleOption = (event, name, action) => {
+		/* this function takes name of the option (in useState above) and the action(increase or decrease) as the argument
+it takes the previous state(original state value), returns it, and if we wrap the name(adult,child, room) in an array
+it will help us to find it in our original object in the state
+
+it will find the name of in the array, and if the action is decrease, then it will +1. and of course
+options[name]: it will find the value from the object, in this case it's 1, 0, 1*/
+		event.preventDefault();
+		event.stopPropagation();
+		setOptions((prev) => {
+			return {
+				...prev,
+				[name]: action === 'decrease' ? prev[name] - 1 : prev[name] + 1,
+			};
+		});
+	};
+
 	return (
 		<HeaderWrapper>
 			<HeaderContainer>
@@ -164,7 +202,21 @@ const Header = () => {
 								type="date"
 								placeholder="Check-in date -- Check-out date"
 							></SearchInput> */}
-						<HeaderSearchSpan>Check-in date -- Check-out date</HeaderSearchSpan>
+						<HeaderSearchSpan
+							onClick={() => setOpenDatePicker(!openDatePicker)}
+						>{`${format(date[0].startDate, 'MM/dd/yyyy')} to ${format(
+							date[0].endDate,
+							'MM/dd/yyyy'
+						)}`}</HeaderSearchSpan>
+						{openDatePicker && (
+							<DateRange
+								editableDateInputs={true}
+								onChange={(item) => setDate([item.selection])}
+								moveRangeOnFirstSelection={false}
+								ranges={date}
+								className="date-range"
+							/>
+						)}
 					</HeaderSearchItems>
 
 					<HeaderSearchItems>
@@ -175,7 +227,84 @@ const Header = () => {
 								type="text"
 								placeholder="Where are you going?"
 							></SearchInput> */}
-						<HeaderSearchSpan>2 adults; 0 children; 1 room</HeaderSearchSpan>
+						<HeaderSearchSpan
+							onClick={() => setOpenOptions(!openOptions)}
+						>{`${options.adult} adults · ${options.child} children · ${options.room} room`}</HeaderSearchSpan>
+
+						{openOptions && (
+							<div className="optionWrapper">
+								<div className="optionItems">
+									<span className="optionText">Adults</span>
+									<div className="optionCounter">
+										<button
+											disabled={options.adult <= 1}
+											className="optionCounterBtn"
+											onClick={(event) =>
+												handleOption(event, 'adult', 'decrease')
+											}
+										>
+											-
+										</button>
+										<span className="optionCounterNum">{options.adult}</span>
+										<button
+											className="optionCounterBtn"
+											onClick={(event) =>
+												handleOption(event, 'adult', 'increase')
+											}
+										>
+											+
+										</button>
+									</div>
+								</div>
+								<div className="optionItems">
+									<span className="optionText">Children</span>
+									<div className="optionCounter">
+										<button
+											disabled={options.child <= 0}
+											className="optionCounterBtn"
+											onClick={(event) =>
+												handleOption(event, 'child', 'decrease')
+											}
+										>
+											-
+										</button>
+										<span className="optionCounterNum">{options.child}</span>
+										<button
+											className="optionCounterBtn"
+											onClick={(event) =>
+												handleOption(event, 'child', 'increase')
+											}
+										>
+											+
+										</button>
+									</div>
+								</div>
+								<div className="optionItems">
+									<span className="optionText">Rooms</span>
+									<div className="optionCounter">
+										{/* we're passing here on the btn a function when you click it increase or decrease, depending on the variable we passed in (name, and the operation mode->increase or decrease) */}
+										<button
+											disabled={options.room <= 1}
+											className="optionCounterBtn"
+											onClick={(event) =>
+												handleOption(event, 'room', 'decrease')
+											}
+										>
+											-
+										</button>
+										<span className="optionCounterNum">{options.room}</span>
+										<button
+											className="optionCounterBtn"
+											onClick={(event) =>
+												handleOption(event, 'room', 'increase')
+											}
+										>
+											+
+										</button>
+									</div>
+								</div>
+							</div>
+						)}
 					</HeaderSearchItems>
 					<HeaderBtn>Search</HeaderBtn>
 				</HeaderSearchContainer>
