@@ -97,6 +97,7 @@ const HeaderSearchItems = styled.div`
 	display: flex;
 	align-items: center;
 	gap: 5px;
+	z-index: 2;
 `;
 
 const SearchInput = styled.input`
