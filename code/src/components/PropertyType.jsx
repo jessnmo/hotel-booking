@@ -1,26 +1,9 @@
-import styled from 'styled-components';
-
-const PropertyContainer = styled.div`
-	width: 100%;
-	max-width: 1024px;
-	display: flex;
-	//justify-content: space-around;
-	gap: 1.2em;
-`;
-
-const PropertyItem = styled.div`
-	cursor: pointer;
-	overflow: hidden;
-`;
-
-const PropertyImg = styled.img`
-	width: 100%;
-	object-fit: cover;
-
-	//flex: 1;
-`;
-
-const PropertyTitle = styled.div``;
+import {
+	PropertyContainer,
+	PropertyImg,
+	PropertyItem,
+	PropertyTitle,
+} from '../style/FeaturedStyle';
 
 const PropertyList = () => {
 	return (
@@ -63,6 +46,16 @@ const PropertyList = () => {
 				<PropertyTitle>
 					<h3>Villas</h3>
 					<p>xxx villas</p>
+				</PropertyTitle>
+			</PropertyItem>
+			<PropertyItem>
+				<PropertyImg
+					src="https://r-xx.bstatic.com/xdata/images/hotel/263x210/52979454.jpeg?k=6ac6d0afd28e4ce00a8f817cc3045039e064469a3f9a88059706c0b45adf2e7d&o="
+					alt="Cabins"
+				/>
+				<PropertyTitle>
+					<h3>Cabins</h3>
+					<p>xxx cabins</p>
 				</PropertyTitle>
 			</PropertyItem>
 		</PropertyContainer>

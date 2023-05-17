@@ -6,7 +6,8 @@ const FeaturedContainer = styled.div`
 	max-width: 1024px;
 	display: flex;
 	justify-content: space-between;
-	gap: 1.5em;
+	margin-bottom: 1.5em;
+	gap: 2em;
 	z-index: 1;
 `;
 
