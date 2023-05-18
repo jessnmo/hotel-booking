@@ -5,6 +5,7 @@ import Featured from '../components/Featured';
 import PropertyType from '../components/PropertyType';
 import PopularProperty from '../components/PopularProperty';
 import MailList from '../components/MailList';
+import Footer from '../components/Footer';
 
 const DisplayContainer = styled.div`
 	display: flex;
@@ -32,6 +33,7 @@ const Home = () => {
 				<HomeTitle>Homes guests love</HomeTitle>
 				<PopularProperty />
 				<MailList />
+				<Footer />
 			</DisplayContainer>
 		</div>
 	);
