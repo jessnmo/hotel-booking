@@ -12,8 +12,8 @@ import { DateRange } from 'react-date-range';
 import 'react-date-range/dist/styles.css'; // main css file
 import 'react-date-range/dist/theme/default.css'; // theme css file
 import { format } from 'date-fns';
-
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const HeaderWrapper = styled.div`
 	background-color: #003580;
@@ -131,6 +131,7 @@ const Header = ({ type }) => {
 		room: 1,
 	});
 	const [openOptions, setOpenOptions] = useState(false);
+	const [destination, setDestination] = useState('');
 
 	const handleOption = (event, name, action) => {
 		/* this function takes name of the option (in useState above) and the action(increase or decrease) as the argument
@@ -146,6 +147,18 @@ options[name]: it will find the value from the object, in this case it's 1, 0, 1
 				...prev,
 				[name]: action === 'decrease' ? prev[name] - 1 : prev[name] + 1,
 			};
+		});
+	};
+
+	const navigate = useNavigate();
+
+	const handleSearch = () => {
+		navigate('/search', {
+			state: {
+				destination,
+				date,
+				options,
+			},
 		});
 	};
 
@@ -192,6 +205,7 @@ options[name]: it will find the value from the object, in this case it's 1, 0, 1
 								<SearchInput
 									type="text"
 									placeholder="Where are you going?"
+									onChange={(e) => setDestination(e.target.value)}
 								></SearchInput>
 							</HeaderSearchItems>
 
@@ -305,7 +319,7 @@ options[name]: it will find the value from the object, in this case it's 1, 0, 1
 									</div>
 								)}
 							</HeaderSearchItems>
-							<HeaderBtn>Search</HeaderBtn>
+							<HeaderBtn onClick={handleSearch}>Search</HeaderBtn>
 						</HeaderSearchContainer>
 					</>
 				)}
