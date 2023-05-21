@@ -226,6 +226,7 @@ options[name]: it will find the value from the object, in this case it's 1, 0, 1
 										onChange={(item) => setDate([item.selection])}
 										moveRangeOnFirstSelection={false}
 										ranges={date}
+										minDate={new Date()}
 										className="date-range"
 									/>
 								)}
