@@ -82,3 +82,29 @@ code {
 	font-weight: 300;
 	margin: 2px;
 }
+
+.searchOptionItems {
+	display: flex;
+	justify-content: space-between;
+	/* margin-bottom: 10px; */
+	font-size: 12px;
+	color: #555;
+}
+
+.searchOptions {
+	padding-top: 10px;
+}
+
+.searchOptionsInput {
+	width: 50px;
+}
+
+.resultSearchBtn {
+	padding: 10px;
+	border: none;
+	cursor: pointer;
+	color: white;
+	background-color: #0171c2;
+	width: 100%;
+	font-weight: heavy;
+}

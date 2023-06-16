@@ -38,11 +38,17 @@ const SearchTitle = styled.h1`
 	margin-bottom: 20px;
 `;
 
-const SearchForm = styled.form``;
+const SearchForm = styled.form`
+	display: flex;
+	flex-direction: column;
+	padding: 10px;
+`;
 
 const Label = styled.label``;
 
 const Input = styled.input`
+	border: none;
+	width: 90%;
 	height: 30px;
 	padding: 5px;
 	margin: 10px;
@@ -50,15 +56,27 @@ const Input = styled.input`
 
 const Span = styled.span`
 	background-color: white;
-	padding: 5px;
+	/* padding: 5px;
 	height: 30px;
 	display: flex;
 	align-items: center;
+	width: 90%; */
+	border: none;
+	width: 90%;
+	height: 30px;
+	padding: 5px;
+	margin: 10px;
+	display: flex;
+	align-items: center;
+	//justify-content: center;
+	cursor: pointer;
 `;
+
+const OptionText = styled.span``;
 
 const SearchResults = () => {
 	const location = useLocation();
-	//console.log(location);
+	console.log(location);
 
 	const [destination, setDestination] = useState(location.state.destination); // we can see from the console that the destination is under state, and the whole object is location
 	const [date, setDate] = useState(location.state.date); // we can see from the console that the destination is under state, and the whole object is location
@@ -77,6 +95,7 @@ const SearchResults = () => {
 							<Label>Destination/property name</Label>
 							<Input type="text" placeholder={destination}></Input>
 						</SearchForm>
+
 						<SearchForm>
 							<Label>Check-in date</Label>
 							<Span
@@ -93,7 +112,66 @@ const SearchResults = () => {
 								></DateRange>
 							)}
 						</SearchForm>
+
+						<SearchForm>
+							<Label>Options</Label>
+							<div className="searchOptions">
+								<div className="searchOptionItems">
+									<span className="searchOptionsTitle">
+										Min Price <small>per night</small>
+									</span>
+									<input type="number" className="searchOptionsInput" />
+								</div>
+							</div>
+
+							<div className="searchOptions">
+								<div className="searchOptionItems">
+									<span className="searchOptionsTitle">
+										Max Price <small>per night</small>
+									</span>
+									<input type="number" className="searchOptionsInput" />
+								</div>
+							</div>
+
+							<div className="searchOptions">
+								<div className="searchOptionItems">
+									<span className="searchOptionsTitle">Adult</span>
+									<input
+										type="number"
+										className="searchOptionsInput"
+										placeholder={options.adult}
+										min={1}
+									/>
+								</div>
+							</div>
+
+							<div className="searchOptions">
+								<div className="searchOptionItems">
+									<span className="searchOptionsTitle">Children</span>
+									<input
+										type="number"
+										className="searchOptionsInput"
+										placeholder={options.child}
+										min={0}
+									/>
+								</div>
+							</div>
+
+							<div className="searchOptions">
+								<div className="searchOptionItems">
+									<span className="searchOptionsTitle">Room</span>
+									<input
+										type="number"
+										className="searchOptionsInput"
+										placeholder={options.room}
+										min={1}
+									/>
+								</div>
+							</div>
+						</SearchForm>
+						<button className="resultSearchBtn">Search</button>
 					</ResultSearchBar>
+
 					<ResultDetails>Results</ResultDetails>
 				</ResultWrapper>
 			</ResultsContainer>
