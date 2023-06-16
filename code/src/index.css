@@ -109,5 +109,42 @@ code {
 	font-weight: 800;
 }
 
-.resultDetails {
+.detailWrapper {
+	border: solid 1px lightgray;
+	border-radius: 5px;
+	/* display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 1rem; */
+	display: grid;
+	grid-template-columns: 1fr 3fr 1fr;
+	grid-gap: 1rem;
+	margin-bottom: 1rem;
+}
+
+.resultIMG {
+	width: 200px;
+	height: 200px;
+	object-fit: cover;
+}
+
+.detailDescription {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	flex: 2;
+}
+
+.detailTitle {
+	font-size: 1.5em;
+	color: #0171c2;
+}
+
+.detail {
+	flex: 1;
+}
+
+.detailDistance,
+.detailTaxi {
+	font-size: 12px;
 }

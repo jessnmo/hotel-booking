@@ -30,6 +30,7 @@ const ResultSearchBar = styled.div`
 	position: sticky;
 	top: 10px;
 	border-radius: 3px;
+	//height: 500px;
 `;
 
 const SearchTitle = styled.h1`
