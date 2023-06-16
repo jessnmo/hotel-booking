@@ -106,5 +106,8 @@ code {
 	color: white;
 	background-color: #0171c2;
 	width: 100%;
-	font-weight: heavy;
+	font-weight: 800;
+}
+
+.resultDetails {
 }

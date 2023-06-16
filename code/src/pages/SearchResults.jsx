@@ -5,6 +5,7 @@ import { useLocation } from 'react-router-dom';
 import { useState } from 'react';
 import { format } from 'date-fns';
 import { DateRange } from 'react-date-range';
+import ResultDetails from '../components/ResultDetails';
 
 //This is the search result page, that's why we're showing the header a bit different, meaning a smaller margin because we don't see to see the search bar
 //this will return the page when you clicked one of the search from search bar
@@ -30,8 +31,6 @@ const ResultSearchBar = styled.div`
 	top: 10px;
 	border-radius: 3px;
 `;
-
-const ResultDetails = styled.div``;
 
 const SearchTitle = styled.h1`
 	font-size: 20px;
@@ -71,8 +70,6 @@ const Span = styled.span`
 	//justify-content: center;
 	cursor: pointer;
 `;
-
-const OptionText = styled.span``;
 
 const SearchResults = () => {
 	const location = useLocation();
@@ -171,8 +168,13 @@ const SearchResults = () => {
 						</SearchForm>
 						<button className="resultSearchBtn">Search</button>
 					</ResultSearchBar>
-
-					<ResultDetails>Results</ResultDetails>
+					<div className="resultDetails">
+						<ResultDetails />
+						<ResultDetails />
+						<ResultDetails />
+						<ResultDetails />
+						<ResultDetails />
+					</div>
 				</ResultWrapper>
 			</ResultsContainer>
 		</div>
