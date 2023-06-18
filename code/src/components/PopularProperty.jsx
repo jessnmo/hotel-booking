@@ -10,7 +10,7 @@ const Rating = styled.div`
 	gap: 5px;
 `;
 
-const RatingBtn = styled.button`
+export const RatingBtn = styled.button`
 	background-color: #003580;
 	color: white;
 	border: none;

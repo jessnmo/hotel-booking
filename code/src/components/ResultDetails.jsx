@@ -1,3 +1,5 @@
+import { RatingBtn } from '../components/PopularProperty';
+
 const ResultDetails = () => {
 	return (
 		<div className="detailWrapper">
@@ -21,7 +23,18 @@ const ResultDetails = () => {
 					You can cancel later, so lock in this great price today!
 				</span>
 			</div>
-			<div className="detail">Details</div>
+
+			<div className="detail">
+				<div className="detailRating">
+					<span>Excellent</span>
+					<RatingBtn>9.2</RatingBtn>
+				</div>
+				<div className="detailText">
+					<span className="detailPrice">$XXX</span>
+					<span className="detailTax">Includes Tax and Fees</span>
+					<button className="detailBtn">Check Availability</button>
+				</div>
+			</div>
 		</div>
 	);
 };
