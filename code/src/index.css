@@ -209,4 +209,10 @@ code {
 	padding: 10px;
 	border-radius: 5px;
 	margin-top: 5px;
+	cursor: pointer;
+	font-weight: 700;
+}
+
+.detailBtn:hover {
+	background-color: #00487a;
 }
