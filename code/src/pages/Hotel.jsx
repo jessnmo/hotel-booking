@@ -1,25 +1,54 @@
 import React from 'react';
 import NavBar from '../components/NavBar';
 import Header from '../components/Header';
-//import { useNavigate } from 'react-router-dom';
+
 import styled from 'styled-components';
 //import { FaLocationDot } from 'react-icons/fa';
 
-const HotelContainer = styled.div``;
+const HotelContainer = styled.div`
+	display: flex;
+	justify-content: center;
+	margin-top: 20px;
+`;
 
-const HotelWrapper = styled.div``;
+const HotelWrapper = styled.div`
+	width: 100%;
+	max-width: 1024px;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	//position: relative;
+`;
 
 const Title = styled.h1``;
 
 const HotelAddressContainer = styled.div``;
 
-const HotelIMGContainer = styled.div``;
+const HotelIMGContainer = styled.div`
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+`;
 
-const IMGWrapper = styled.div``;
+const IMGWrapper = styled.div`
+	width: 33%;
+`;
+
+const HotelImg = styled.img`
+	width: 100%;
+	object-fit: cover;
+	cursor: pointer;
+`;
+
+const HotelDetails = styled.div``;
+
+const HotelDescription = styled.div``;
+
+const DescriptionText = styled.p``;
+
+const Reserve = styled.div``;
 
 const Hotel = () => {
-	//const navigate = useNavigate();
-
 	const photos = [
 		{
 			src: 'https://cf.bstatic.com/xdata/images/hotel/max1280x900/261707778.jpg?k=56ba0babbcbbfeb3d3e911728831dcbc390ed2cb16c51d88159f82bf751d04c6&o=&hp=1',
@@ -56,10 +85,29 @@ const Hotel = () => {
 					<HotelIMGContainer>
 						{photos.map((photo) => (
 							<IMGWrapper>
-								<img src={photo.src} alt="" />
+								<HotelImg src={photo.src} alt="hotel_img" />
 							</IMGWrapper>
 						))}
 					</HotelIMGContainer>
+
+					<HotelDetails>
+						<HotelDescription>
+							<h1>XXX</h1>
+							<DescriptionText>Description goes here</DescriptionText>
+						</HotelDescription>
+						<Reserve>
+							<h1>Property Highlight</h1>
+							<h2>Perfect for a 3-night stay!</h2>
+							<span>
+								Located in the real heart of Krakow, this property has an
+								excellent location score of 9.8!
+							</span>
+							<h2>
+								<b>$945</b> (9 nights)
+							</h2>
+							<button>Reserve or Book Now!</button>
+						</Reserve>
+					</HotelDetails>
 				</HotelWrapper>
 			</HotelContainer>
 		</div>
