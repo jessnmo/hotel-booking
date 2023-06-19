@@ -3,7 +3,7 @@ import NavBar from '../components/NavBar';
 import Header from '../components/Header';
 
 import styled from 'styled-components';
-//import { FaLocationDot } from 'react-icons/fa';
+import { BsPinMapFill } from 'react-icons/bs';
 
 const HotelContainer = styled.div`
 	display: flex;
@@ -22,7 +22,11 @@ const HotelWrapper = styled.div`
 
 const Title = styled.h1``;
 
-const HotelAddressContainer = styled.div``;
+const HotelAddressContainer = styled.div`
+	display: flex;
+	align-items: center;
+	gap: 10px;
+`;
 
 const HotelIMGContainer = styled.div`
 	display: flex;
@@ -40,13 +44,23 @@ const HotelImg = styled.img`
 	cursor: pointer;
 `;
 
-const HotelDetails = styled.div``;
+const HotelDetails = styled.div`
+	display: grid;
+	grid-template-columns: 3fr 1fr;
+	grid-gap: 10px;
+`;
 
 const HotelDescription = styled.div``;
 
-const DescriptionText = styled.p``;
+const DescriptionText = styled.p`
+	font-size: 16px;
+	line-height: 1.5;
+`;
 
-const Reserve = styled.div``;
+const Reserve = styled.div`
+	background-color: #e4f3ff;
+	padding: 10px;
+`;
 
 const Hotel = () => {
 	const photos = [
@@ -76,12 +90,13 @@ const Hotel = () => {
 			<Header />
 			<HotelContainer>
 				<HotelWrapper>
-					<Title>XXX</Title>
+					<Title>Cracow Central Aparthotel</Title>
 					<HotelAddressContainer>
-						{/* <FaLocationDot /> */}
-						<span>LOCATION</span>
+						<BsPinMapFill />
+						<p>Kurniki 4, Old Town, 31-156 Kraków, Poland </p>
+						<span style={{ color: '#0171c2' }}>- Excellent Location</span>
 					</HotelAddressContainer>
-					<span>-Excellent Location </span>
+
 					<HotelIMGContainer>
 						{photos.map((photo) => (
 							<IMGWrapper>
@@ -92,20 +107,38 @@ const Hotel = () => {
 
 					<HotelDetails>
 						<HotelDescription>
-							<h1>XXX</h1>
-							<DescriptionText>Description goes here</DescriptionText>
+							<h1 style={{ fontSize: '18px' }}>
+								About Cracow Central Aparthotel
+							</h1>
+							<DescriptionText>
+								You're eligible for a Genius discount at Cracow Central
+								Aparthotel! To save at this property, all you have to do is sign
+								in. Situated in Kraków in the Lesser Poland region, 500 metres
+								to the main train station, Cracow Central Aparthotel features
+								accommodation with free WiFi. The aparthotel offers a
+								flat-screen TV and a private bathroom with free toiletries, a
+								hair dryer and shower. A fridge and kettle are also available. A
+								continental breakfast is served every morning at the property.
+								St. Mary's Basilica is 850 metres from Cracow Central
+								Aparthotel, while St. Florian's Gate is 400 metres from the
+								property. The nearest airport is John Paul II International
+								Kraków–Balice Airport, 17 km from the property. This is our
+								guests' favourite part of Kraków, according to independent
+								reviews. Couples particularly like the location — they rated it
+								9.7 for a two-person trip.
+							</DescriptionText>
 						</HotelDescription>
 						<Reserve>
-							<h1>Property Highlight</h1>
-							<h2>Perfect for a 3-night stay!</h2>
-							<span>
+							<h1 style={{ fontSize: '18px' }}>Property Highlight</h1>
+							<h2 style={{ fontSize: '16px' }}>Perfect for a 3-night stay!</h2>
+							<span style={{ fontSize: '12px' }}>
 								Located in the real heart of Krakow, this property has an
 								excellent location score of 9.8!
 							</span>
-							<h2>
+							<h2 style={{ fontSize: '16px' }}>
 								<b>$945</b> (9 nights)
 							</h2>
-							<button>Reserve or Book Now!</button>
+							<button className="resultSearchBtn">Reserve or Book Now!</button>
 						</Reserve>
 					</HotelDetails>
 				</HotelWrapper>
