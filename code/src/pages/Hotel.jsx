@@ -1,9 +1,16 @@
 import React from 'react';
 import NavBar from '../components/NavBar';
 import Header from '../components/Header';
-
+import MailList from '../components/MailList';
+import Footer from '../components/Footer';
 import styled from 'styled-components';
-import { BsPinMapFill } from 'react-icons/bs';
+import {
+	BsPinMapFill,
+	BsFillArrowLeftCircleFill,
+	BsFillArrowRightCircleFill,
+} from 'react-icons/bs';
+import { AiFillCloseCircle } from 'react-icons/ai';
+import { useState } from 'react';
 
 const HotelContainer = styled.div`
 	display: flex;
@@ -62,7 +69,12 @@ const Reserve = styled.div`
 	padding: 10px;
 `;
 
+const BiggerImg = styled.div``;
+
 const Hotel = () => {
+	const [biggerImgIndex, setBiggerImgIndex] = useState(0);
+	const [openBiggerImg, setOpenBiggerImg] = useState(false);
+
 	const photos = [
 		{
 			src: 'https://cf.bstatic.com/xdata/images/hotel/max1280x900/261707778.jpg?k=56ba0babbcbbfeb3d3e911728831dcbc390ed2cb16c51d88159f82bf751d04c6&o=&hp=1',
@@ -84,11 +96,25 @@ const Hotel = () => {
 		},
 	];
 
+	const handleBiggerImg = (i) => {
+		setBiggerImgIndex(i);
+		setOpenBiggerImg(true);
+	};
+
 	return (
 		<div>
 			<NavBar />
 			<Header />
 			<HotelContainer>
+				{/* the bigger img container is above the multiple small img you see on the hotel page.
+                It opens by condition, with buttons indicating going forward/back/close */}
+				{openBiggerImg && (
+					<BiggerImg>
+						<BsFillArrowLeftCircleFill />
+						<BsFillArrowRightCircleFill />
+						<AiFillCloseCircle />
+					</BiggerImg>
+				)}
 				<HotelWrapper>
 					<Title>Cracow Central Aparthotel</Title>
 					<HotelAddressContainer>
@@ -98,9 +124,13 @@ const Hotel = () => {
 					</HotelAddressContainer>
 
 					<HotelIMGContainer>
-						{photos.map((photo) => (
+						{photos.map((photo, i) => (
 							<IMGWrapper>
-								<HotelImg src={photo.src} alt="hotel_img" />
+								<HotelImg
+									onClick={handleBiggerImg}
+									src={photo.src}
+									alt="hotel_img"
+								/>
 							</IMGWrapper>
 						))}
 					</HotelIMGContainer>
@@ -143,6 +173,8 @@ const Hotel = () => {
 					</HotelDetails>
 				</HotelWrapper>
 			</HotelContainer>
+			<MailList />
+			<Footer />
 		</div>
 	);
 };
