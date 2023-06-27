@@ -69,7 +69,11 @@ const Reserve = styled.div`
 	padding: 10px;
 `;
 
-const BiggerImg = styled.div``;
+const BiggerImgContainer = styled.div``;
+
+const BiggerImgWrapper = styled.div``;
+
+const BiggerImgSlider = styled.img``;
 
 const Hotel = () => {
 	const [biggerImgIndex, setBiggerImgIndex] = useState(0);
@@ -109,11 +113,14 @@ const Hotel = () => {
 				{/* the bigger img container is above the multiple small img you see on the hotel page.
                 It opens by condition, with buttons indicating going forward/back/close */}
 				{openBiggerImg && (
-					<BiggerImg>
+					<BiggerImgContainer>
 						<BsFillArrowLeftCircleFill />
 						<BsFillArrowRightCircleFill />
 						<AiFillCloseCircle />
-					</BiggerImg>
+						<BiggerImgWrapper>
+							<BiggerImgSlider src={photos[biggerImgIndex].src} alt="" />
+						</BiggerImgWrapper>
+					</BiggerImgContainer>
 				)}
 				<HotelWrapper>
 					<Title>Cracow Central Aparthotel</Title>
@@ -127,7 +134,7 @@ const Hotel = () => {
 						{photos.map((photo, i) => (
 							<IMGWrapper>
 								<HotelImg
-									onClick={handleBiggerImg}
+									onClick={() => handleBiggerImg(i)}
 									src={photo.src}
 									alt="hotel_img"
 								/>
